@@ -32,9 +32,28 @@ void enrollStudent(){
 void printClassList(){
 	int count;
 	
-	for (count = i; count>=0; count--){
-		printf("%s %s\n", fname[count], lname[count]);
+	for (count = i-1; count>=0; count--){
+		printf("%s, %s\n", lname[count], fname[count]);
 	}
+}
+
+void sortList(){
+	int x, y;
+	char tempFirst[20], tempLast[20];
+	
+	for (x=0; x<i; x++){
+		for (y=0; y<i; y++){
+			if (strcmp(lname[y], lname[y+1]) < 0){
+				strcpy(tempLast, lname[y]);
+				strcpy(tempFirst, fname[y]);
+				strcpy(lname[y], lname[y+1]);
+				strcpy(fname[y], fname[y+1]);
+				strcpy(lname[y+1], tempLast);
+				strcpy(fname[y+1], tempFirst);
+			}
+		}
+	}
+
 }
 
 void selection(int num){
@@ -48,6 +67,9 @@ void selection(int num){
 				break;
 		case 2: printClassList();
 				break;
+		case 3: sortList();
+				printClassList();
+				break;
 		default: printf("Invalid key.\n\n");
 	}
 }
@@ -55,10 +77,13 @@ void selection(int num){
 int main(){
 	int choice;
 	while (1){
+		printf("--------------------\n");
 		printf("STUDENT TRACKER\n");
+		printf("--------------------\n");
 	
 		printf("[1]Enroll student\n");
 		printf("[2]View Class List\n");
+		printf("[3]Sorted Class List\n");
 		printf("[0]Exit\n");
 		
 		printf("Select a transaction: ");

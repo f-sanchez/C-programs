@@ -66,3 +66,10 @@
 
 
 @end
+
+/*
+float answer = [_num1.text floatValue] + [_num2.text floatValue]; //num1 and num2 = vars
+[answer setValue: result]; //answer = var | result=txtbox
+_result.text = [NSString stringWithFormat: @"%0.2f", answer];
+
+*/

@@ -70,3 +70,12 @@ int main(){
     
 }
 
+/*
+
+return a[0];    //returning first element
+for (i = 0; i < tail-1; i++)    //shifting all other elements
+{
+    a[i] = a[i+1];
+    tail--;
+}
+*/

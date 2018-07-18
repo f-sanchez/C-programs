@@ -1,0 +1,72 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include<iostream>
+
+using namespace std;
+
+#define SIZE 10
+
+class Queue{
+    
+    int a[SIZE];
+    int rear; //aka tail
+    int front; //aka head
+    
+public:
+    Queue() {  //constructor
+        rear = front = -1;
+    }    
+    
+    //declare all functions in Queue
+    void enqueue(int x);
+    int dequeue();
+    void display();
+    
+};
+
+void Queue::enqueue(int x){
+    if (front == -1)
+        front++;
+        
+    if (rear == SIZE-1){
+        cout << "Queue overflow.\n";
+        return;
+    } else {
+        a[++rear] = x;
+        cout << x << endl;
+    }
+}
+
+int Queue::dequeue(){
+    if ((rear && front) == -1){
+        cout << "Queue underflow.\n";
+    }
+    return a[++front];
+}
+
+void Queue::display(){
+    int i;
+    cout << "Queued elements:" << endl;
+    for (i=front; i<=rear; i++){
+        cout << a[i] << endl;
+    }
+}
+
+int main(){
+    Queue q;
+    q.enqueue(9);
+    q.enqueue(3);
+    q.dequeue();
+    q.dequeue();
+    q.enqueue(4);
+    q.enqueue(1);
+    q.display();
+    
+}
+

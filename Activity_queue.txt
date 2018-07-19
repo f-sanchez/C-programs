@@ -40,7 +40,7 @@ int dequeue(){
     //     }
     // }
     return queue[++front];
-    rear--;
+    //rear--;
 }
 
 void display(){

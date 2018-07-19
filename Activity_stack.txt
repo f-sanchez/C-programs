@@ -1,0 +1,120 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+  #include <stdio.h>
+  #include <stdlib.h>
+  
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+typedef struct node node;
+
+node *top;
+
+void initialize(){
+    top = NULL;
+}
+
+void push(int item){
+    node *temp;
+    temp = malloc(sizeof(node));
+    temp->data = item;
+    temp->next = top;
+    top = temp;
+    printf("Element %d pushed to stack.\n", item);
+}
+
+void pop(){
+    node *temp;
+    temp = top;
+    top = top->next;
+    free(temp);
+}
+
+int top_of_stack(){
+    return top->data;
+    
+}
+
+int isEmpty(){
+    return top == NULL;
+}
+
+void print_stack(node *head){
+    if(head == NULL){
+        printf("Stack empty.\n");
+    } else {
+        printf("Stack Items:\n");
+        while (head != NULL){
+            printf("%d\n", head->data);
+            head = head->next;
+        }
+        printf("\n");
+        
+    }
+}
+
+int main(){
+    initialize();
+    int choice;
+    while (1){
+        printf("Choose a task:\n");
+        printf("[1] Push an item into Stack\n");
+        printf("[2] Pop item from Stack\n");
+        printf("[3] Return value of Top\n");
+        printf("[4] Print items in Stack\n");
+        printf("[0] Exit\n");
+        scanf("%d", &choice);
+        
+        switch(choice){
+            case 0: exit(0);
+            case 1: printf("Input item: ");
+                    int item;
+                    scanf("%d", &item);
+                    push(item);
+                    print_stack(top);
+                    break;
+            case 2: pop();
+                    print_stack(top);
+                    break;
+            case 3: if (top == NULL){
+                        printf("Stack empty.\n");
+                    } else {
+                        printf("Top of Stack: %d\n", top_of_stack());
+                    }
+                    break;
+            case 4: printf("Items in Stack: \n");
+                    print_stack(top);
+                    break;
+            default: printf("Invalid choice.\n");
+        }
+    }
+    // push(8);
+    // push(7);
+    // push(4);
+    // push(9);
+    // print_stack(top);
+    // pop();
+    // pop();
+    // print_stack(top);
+    return 0;
+    
+}
+
+
+
+
+
+
+
+
+mine
+

@@ -1,0 +1,109 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+  #include <stdio.h>
+  #include <stdlib.h>
+  #define SIZE 5
+
+    int queue[SIZE];
+    int rear = -1; //aka tail
+    int front = -1; //aka head
+
+void enqueue(int item){
+    if (front == -1)
+        front++;
+        
+    if (rear == SIZE-1){
+        printf("Queue overflow.\n");
+        return;
+    } else {
+        queue[++rear] = item;
+        printf("element added to queue: %d\n", item);
+    }
+}
+
+int dequeue(){
+    if ((rear && front) == -1){
+        printf("Queue underflow.\n");
+    } 
+    // else {
+    //     return queue[0];
+    //     int i;
+    //     for (i=0; i<rear-1; i++){
+    //         queue[i] = queue[i+1];
+    //         // rear--;
+    //     }
+    // }
+    return queue[++front];
+    rear--;
+}
+
+void display(){
+    int i;
+    // printf("ajgka");
+    if ((front && rear) == -1){
+        printf("Queue empty.\n");
+    } else {
+        printf("Queue: ");
+        for (i=front; i<=rear; i++){
+            if (i == rear){
+                printf("[%d] =>%d) ", i, queue[i]);
+            } else {
+                printf("([%d] =>%d, ", i, queue[i]);
+            }
+            
+        }
+    }
+    printf("\n");
+}
+
+int main(){
+    
+    int choice;
+    int item;
+    while(1){
+        printf("[1] enqueue\n");
+        printf("[2] dequeue\n");
+        scanf("%d", &choice);
+        switch(choice){
+            case 1: printf("Enter item: ");
+                    int item;
+                    scanf("%d", &item);
+                    fflush(stdin);
+                    enqueue(item);
+                    display();
+                    break;
+            case 2: dequeue();
+                    display();
+                    break;
+        }
+        
+    }
+    
+    
+    // Queue q;
+    // q.enqueue(9);
+    // q.enqueue(3);
+    // q.dequeue();
+    // q.dequeue();
+    // q.enqueue(4);
+    // q.enqueue(1);
+    // q.display();
+    
+}
+
+/*
+
+return a[0];    //returning first element
+for (i = 0; i < tail-1; i++)    //shifting all other elements
+{
+    a[i] = a[i+1];
+    tail--;
+}
+*/
+

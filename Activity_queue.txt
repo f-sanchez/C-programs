@@ -8,15 +8,28 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
   #include <stdio.h>
   #include <stdlib.h>
-  #define SIZE 5
+  #define SIZE 5        //set max size
 
-    int queue[SIZE];
+    
     int rear = -1; //aka tail
-    int front = -1; //aka head
+    int front = -1; //aka hea
+    int size = 0; //number of queue items
 
-void enqueue(int item){
+//queue full
+int isFull(int queue[]){
+    return (queue[rear] == queue[SIZE-1]); //returns true (1) if full
+}
+
+//queue empty
+int isEmpty(){
+    return(rear < 0);
+}
+
+void enqueue(int queue[], int item){
     if (front == -1)
-        front++;
+        printf("Front: %d\n", front);
+        front++;\
+        printf("Front: %d\n", front);
         
     if (rear == SIZE-1){
         printf("Queue overflow.\n");
@@ -27,7 +40,7 @@ void enqueue(int item){
     }
 }
 
-int dequeue(){
+int dequeue(int queue[]){
     if ((rear && front) == -1){
         printf("Queue underflow.\n");
     } 
@@ -43,10 +56,19 @@ int dequeue(){
     //rear--;
 }
 
-void display(){
+//get front of queue
+int getFront(int queue[]){
+    return queue[front];
+}
+
+//get rear of queue
+int getRear(int queue[]){
+    return queue[rear];
+}
+
+void display(int queue[]){
     int i;
-    // printf("ajgka");
-    if ((front && rear) == -1){
+    if (isEmpty()){
         printf("Queue empty.\n");
     } else {
         printf("Queue: ");
@@ -63,37 +85,47 @@ void display(){
 }
 
 int main(){
-    
+    int queue[SIZE];
     int choice;
     int item;
     while(1){
         printf("[1] enqueue\n");
         printf("[2] dequeue\n");
+        printf("[3] isFull\n");
+        printf("[4] isEmpty\n");
+        printf("[5] getFront\n");
+        printf("[6] getRear\n");
+        printf("[7] print\n");
+        printf("[0] Exit\n");
         scanf("%d", &choice);
         switch(choice){
             case 1: printf("Enter item: ");
                     int item;
                     scanf("%d", &item);
                     fflush(stdin);
-                    enqueue(item);
-                    display();
+                    enqueue(queue, item);
+                    display(queue);
                     break;
-            case 2: dequeue();
-                    display();
+            case 2: dequeue(queue);
+                    display(queue);
+                    break;
+            case 3: printf("isFull (yes-1 | no- 0): %d\n", (isFull(queue)));
+                    break;
+            case 4: printf("isEmpty (yes-1 | no- 0): %d\n", isEmpty());
+                    break;
+            case 5: printf("Front: %d\n", getFront(queue));
+                    break;
+            case 6: printf("Rear: %d\n", getRear(queue));
+                    break;
+            case 7: display(queue);
+                    break;
+            case 0: exit(0);
+            default: 
+                    printf("Please select a valid key.\n");
                     break;
         }
         
     }
-    
-    
-    // Queue q;
-    // q.enqueue(9);
-    // q.enqueue(3);
-    // q.dequeue();
-    // q.dequeue();
-    // q.enqueue(4);
-    // q.enqueue(1);
-    // q.display();
     
 }
 

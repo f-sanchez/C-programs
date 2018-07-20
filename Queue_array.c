@@ -1,8 +1,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SIZE 5        //set max size
+#include <conio.h>
 
+#define SIZE 5        //set max size
 
 int rear = -1; //aka tail
 int front = -1; //aka head
@@ -77,19 +78,43 @@ void display(int queue[]) {
 	printf("\n");
 }
 
+
+int checkInput(char input) {
+	int flag = 0;
+	for (int i = 48; i <= 57; i++) {
+		if (input == i) {
+			flag = 1;
+			break;
+		}
+	}
+	if (flag == 1) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+
 int main() {
 	int queue[SIZE];
-	int choice;
+
+	printf("--------QUEUE--------\n\n");
 	while (1) {
 		printf("[1] enqueue\n");
 		printf("[2] dequeue\n");
-		printf("[3] isFull\n");
-		printf("[4] isEmpty\n");
-		printf("[5] getFront & getRear\n");
-		printf("[6] display\n");
+		printf("[3] get Front & Rear\n");
+		printf("[4] display\n");
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
-		scanf("%d", &choice);
+		char choice;
+		scanf("%c", &choice);
+		//choice = getch();
+		if (!(checkInput(choice))) {
+			printf("error\n");
+		}
+
+
 		switch (choice) {
 		case 1:
 			system("cls");
@@ -104,16 +129,6 @@ int main() {
 			break;
 		case 3:
 			system("cls");
-			display(queue);
-			printf("isFull: %d\n\n", (isFull(queue)));
-			break;
-		case 4:
-			system("cls");
-			display(queue);
-			printf("isEmpty: %d\n\n", isEmpty());
-			break;
-		case 5:
-			system("cls");
 			if (isEmpty()) {
 				printf("Queue empty.\n\n");
 			}
@@ -123,7 +138,7 @@ int main() {
 				printf("Rear: %d\n\n", getRear(queue));
 			}
 			break;
-		case 6:
+		case 4:
 			system("cls");
 			display(queue);
 			break;

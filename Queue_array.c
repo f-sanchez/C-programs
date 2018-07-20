@@ -113,42 +113,47 @@ int main() {
 		if (!(checkInput(choice))) {
 			printf("error\n");
 		}
+		else {
+			choice = choice - 48;
 
-
-		switch (choice) {
-		case 1:
-			system("cls");
-			printf("Enter item: ");
-			int item;
-			scanf("%d", &item);
-			enqueue(queue, item);
-			break;
-		case 2:
-			system("cls");
-			dequeue(queue);
-			break;
-		case 3:
-			system("cls");
-			if (isEmpty()) {
-				printf("Queue empty.\n\n");
-			}
-			else {
+			switch (choice) {
+			case 1:
+				system("cls");
+				printf("Enter item: ");
+				int item;
+				scanf("%d", &item);
+				enqueue(queue, item);
+				break;
+			case 2:
+				system("cls");
+				dequeue(queue);
+				break;
+			case 3:
+				system("cls");
+				if (isEmpty()) {
+					printf("Queue empty.\n\n");
+				}
+				else {
+					display(queue);
+					printf("Front: %d\n", getFront(queue));
+					printf("Rear: %d\n\n", getRear(queue));
+				}
+				break;
+			case 4:
+				system("cls");
 				display(queue);
-				printf("Front: %d\n", getFront(queue));
-				printf("Rear: %d\n\n", getRear(queue));
+				break;
+			case 0:
+				exit(0);
+			default:
+				system("cls");
+				printf("Please select a valid key.\n\n");
+				break;
 			}
-			break;
-		case 4:
-			system("cls");
-			display(queue);
-			break;
-		case 0:
-			exit(0);
-		default:
-			system("cls");
-			printf("Please select a valid key.\n\n");
-			break;
 		}
+
+		getch();
+		return 0;
 	}
 }
 

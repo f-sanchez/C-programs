@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -45,7 +44,15 @@ void dequeue(int queue[]) {
 		front = rear = -1;
 	}
 	else {
-		printf("%d dequeued.\n\n", queue[front++]);
+	    printf("%d dequeued.\n\n", queue[front]);
+	    int i;
+	    for (i=front; i<rear; i++){
+	        printf("1-%d ", queue[i]);
+	        queue[i] = queue[i+1];
+	        printf("2-%d\n", queue[i]);
+	    }
+	    rear--;
+		
 	}
 }
 
@@ -78,7 +85,7 @@ void display(int queue[]) {
 	printf("\n");
 }
 
-
+/*
 int checkInput(char input) {
 	int flag = 0;
 	for (int i = 48; i <= 57; i++) {
@@ -94,6 +101,7 @@ int checkInput(char input) {
 		return 0;
 	}
 }
+*/
 
 
 int main() {
@@ -107,29 +115,33 @@ int main() {
 		printf("[4] display\n");
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
-		char choice;
-		scanf("%c", &choice);
+		int choice;
+		scanf("%d", &choice);
 		//choice = getch();
-		if (!(checkInput(choice))) {
+	/*	if (!(checkInput(choice))) {
 			printf("error\n");
 		}
 		else {
 			choice = choice - 48;
 
-			switch (choice) {
+			
+		}*/
+		switch (choice) {
 			case 1:
-				system("cls");
+				//system("cls");
 				printf("Enter item: ");
 				int item;
 				scanf("%d", &item);
 				enqueue(queue, item);
+				display(queue);
 				break;
 			case 2:
-				system("cls");
+			//	system("cls");
 				dequeue(queue);
+				display(queue);
 				break;
 			case 3:
-				system("cls");
+			//	system("cls");
 				if (isEmpty()) {
 					printf("Queue empty.\n\n");
 				}
@@ -140,21 +152,18 @@ int main() {
 				}
 				break;
 			case 4:
-				system("cls");
+			//	system("cls");
 				display(queue);
 				break;
 			case 0:
 				exit(0);
 			default:
-				system("cls");
+			//	system("cls");
 				printf("Please select a valid key.\n\n");
 				break;
 			}
-		}
 
-		getch();
-		return 0;
+	//	getch();
+	//	return 0;
 	}
 }
-
-

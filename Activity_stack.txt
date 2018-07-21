@@ -1,12 +1,4 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-
-  #include <stdio.h>
+ #include <stdio.h>
   #include <stdlib.h>
   
 
@@ -53,10 +45,12 @@ void print_stack(node *head){
         printf("Stack empty.\n");
     } else {
         printf("Stack Items:\n");
+        printf("Top->");
         while (head != NULL){
-            printf("%d\n", head->data);
+            printf("%d->", head->data);
             head = head->next;
         }
+        printf("NULL");
         printf("\n");
         
     }
@@ -108,13 +102,4 @@ int main(){
     return 0;
     
 }
-
-
-
-
-
-
-
-
-mine
 

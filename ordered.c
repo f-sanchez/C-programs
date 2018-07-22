@@ -11,20 +11,51 @@ int checkListFull(){
 }
 
 void addListItem(int list[], int item){
-	int i, j, temp;
-	list[count] = item;
-	count++;
-	if(count > 0){
-		for(i=0; i<= count; i++){
-			for(j=1; j<count; j++){
-				if(list[j] < list[j-1]){
-					temp = list[j];
-					list[j] = list[j-1];
-					list[j-1] = temp;	
-				}
+	int i, j, temp, loc, temp2, max = 0, min = 0;;
+	
+	if(count == 0){
+		list[count] = item;
+	}
+	else if(count == 1){
+		if(list[count-1] > item){
+			temp = list[count-1];
+			list[count-1] = item;
+			list[count] = temp;
+		}
+		else{
+			list[count] = item;
+		}
+	}
+	else{
+		max = item;
+		min = item;
+		for(j=0; j<count; j++){
+			if(list[j] > max){
+				max = list[j];
+			}
+			if(list[j] < min){
+				min = list[j];
+			}
+			if((list[j] < item) && (list[j+1] > item)){
+				loc = j+1;
+			}
+		}
+		
+		//insertion
+		if(min == item){
+			loc = 0;
+		}
+		if(max == item){
+			loc = count;
+		}
+		for(i=count; i>=loc; i--){
+			list[i] = list[i-1];
+			if(i==loc){
+				list[i] = item;
 			}
 		}
 	}
+	count++;
 }
 
 void removeListItem(int list[], int item){
@@ -37,9 +68,11 @@ void removeListItem(int list[], int item){
 				list[j] = list[j-1];
 				list[j-1] = temp;
 			}
+			count--;
+			break;
 		}
 	}
-	count--;
+	
 }
 
 void display(int list[]){

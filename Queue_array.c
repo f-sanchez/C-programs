@@ -4,6 +4,7 @@
 
 #define SIZE 5        //set max size
 
+//initialization
 int rear = -1; //aka tail
 int front = -1; //aka head
 
@@ -20,15 +21,15 @@ int isFull(int queue[]) {
 //add item to queue
 void enqueue(int queue[], int item) {
 	if (isEmpty()) {
-		front++;
+		front++;	//from -1 to 0 ; index 0 = front
 	}
 
-	if (rear == SIZE - 1) {
+	if (rear == SIZE - 1) {				//index starts from 0 so full = rear = size-1
 		printf("Queue overflow.\n\n");
 		return;
 	}
 	else {
-		queue[++rear] = item;
+		queue[++rear] = item;	//pre increment since rear starts from -1
 		printf("element added to queue: %d\n\n", item);
 	}
 }
@@ -39,19 +40,19 @@ int dequeue(int queue[]) {
 		return -1;
 	}
 	
-	int item1 = queue[front];
+	int item1 = queue[front];	//store queue[front] in item1 to return element for dequeue
 	
 	if (front == rear) {
-		front = rear = -1;
+		front = rear = -1;		//if there is only 1 item in queue, queue resets to empty
 	}
-	else {
+	else {						//else remaining items in queue are shifted to the left to occupy memory left by dequeued item
 	    int i;
 	    for (i=front; i<rear; i++){
 	        queue[i] = queue[i+1];
 	    }
-	    rear--;
+	    rear--;					//rear gets decremented after every dequeue
 	}
-	return item1;
+	return item1;				//return dequeued item (item in front of queue before left shift)
 }
 
 //get front of queue
@@ -70,8 +71,8 @@ void display(int queue[]) {
 		printf("Queue empty.\n");
 	}
 	else {
-		printf("Queue: ");
-		for (i = front; i <= rear; i++) {
+		printf("Queue: ");			
+		for (i = front; i <= rear; i++) {		//print items in queue from front to rear
 			if (i == rear) {
 				printf("[%d] =>%d \n", i, queue[i]);
 			}
@@ -101,10 +102,8 @@ int checkInput(char input) {
 }
 */
 
-
 int main() {
 	int queue[SIZE];
-
 	while (1) {
 		printf("--------QUEUE--------\n\n");
 		printf("[1] enqueue\n");
@@ -159,7 +158,7 @@ int main() {
 				system("cls");
 				printf("Please select a valid key.\n\n");
 				break;
-			}
+		}
 	}
 	return 0;
 }

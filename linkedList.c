@@ -3,25 +3,40 @@
 
 struct node {
 	int data;
-	struct node* next;
+	struct node *next;
 };
 
-typedef struct node* ptr;
+typedef struct node *ptr;
 ptr head, temp, temp1;
 
-void insertFront(int data){
+int count = 0;
+
+int isEmpty(){
+	if (head == NULL){
+		return 1;
+	}	
+	return 0;
+}
+
+//void checkSize(){
+//	temp = head;
+//	while(temp->next != NULL){
+//		count++;
+//	}
+//}
+void insertFront(int item){
 	temp = malloc(sizeof(struct node));
-	temp->data = data;
+	temp->data = item;
 	temp->next = head;
 	head = temp;
 }
 
-void insertEnd(int data){
+void insertEnd(int item){
 	temp1 = malloc(sizeof(struct node));
 	temp = head;
-	temp1->data = data;
+	temp1->data = item;
 	if (temp == NULL){
-		temp1->data = data;
+		temp1->data = item;
 		temp1->next = head;
 		head = temp1;
 	} else {
@@ -33,11 +48,11 @@ void insertEnd(int data){
 	}
 }
 
-void insertNth(int data, int pos){
+void insertNth(int item, int pos){
 	int i;
 	temp = head;
 	temp1 = malloc(sizeof(struct node));
-	temp1->data = data;
+	temp1->data = item;
 	if (temp == NULL && pos != 1){
 		printf("Invalid. List is empty.\n");
 		return;
@@ -52,6 +67,52 @@ void insertNth(int data, int pos){
 		temp1->next = temp->next;
 		temp->next = temp1;
 	}		
+}
+
+void insertItem(int item){
+	temp = head;
+	int counter = 0;
+	
+	if (isEmpty()){
+		insertFront(item);
+		count++;
+	}
+	else if(count == 1){
+		if(temp->data > item){
+			insertFront(item);
+		}
+		else{
+			insertEnd(item);
+		}
+		count++;
+	}
+	else {	
+		int min = item;
+		int max = item;
+		while (temp->next != NULL){
+			
+			if (temp->data > max){
+				max = temp->data;
+			}
+			if (temp->data < min){
+				min = temp->data;
+			}
+			if((temp->data < item) && (temp->next->data > item)){
+				insertNth(item, counter);
+			}
+			temp = temp->next;
+			counter++;
+		}
+		
+//		if (max == item){
+//			insertEnd(item);
+//		}
+//		if (min == item){
+//			insertFront(item);
+//		}
+		
+		count++;
+	}
 }
 
 void printList(){
@@ -70,101 +131,47 @@ void printList(){
 	printf("\n");
 }
 
-void deleteEnd(){
-	temp = head;
-	if (temp == NULL){
-		printf("List is empty.\n");
-	} else {
-		while (temp->next != NULL){
-			temp1 = temp;
-			temp = temp->next;	
-		}
-		temp1->next = temp->next;
-		free(temp);
-	}
-}
-
-void deleteFront(){
-	temp = head;
-	
-	if (temp == NULL){
-		printf("List is empty.\n");
-	} else {
-		temp1 = temp->next;
-		head = temp1;
-		free(temp);
-	}
-}
-
-void deleteNth(int pos){
-	temp = head;
-	int i;
-	if (temp == NULL){
-		printf("List is empty.\n");
-	} 
-	else if (pos ==1 ){
-		deleteFront();
-	} else {
-		for (i=1; i<pos-1; i++){
-			temp = temp->next;
-		}
-		temp1 = temp->next;
-		temp->next = temp1->next;
-		free(temp1);
-	}
-}
-
 int main(){
-	
 	head = NULL;
-	
-	int choice, pos, data;
+	char choice;
+	int data;
 	while (1){
-		printf("Choose a task: \n");
+		fflush(stdin);
+		printf("---------ORDERED LIST--------\n");
+		printf("[1] Insert an Item\n");
+		printf("[2] Remove an Item\n");
+		printf("[3] Head of List\n");
+		printf("[4] Display Sorted List\n");
 		printf("[0] Exit\n");
-		printf("[1] insertFront\n");
-		printf("[2] insertEnd\n");
-		printf("[3] insertNth\n");
-		printf("[4] deleteFront\n");
-		printf("[5] deleteEnd\n");
-		printf("[6] deleteNth\n");
-		printf("[7] printList\n");
-		scanf("%d", &choice);
-		
-		switch (choice){
-			case 0: exit(0);
-			case 1: printf("Input data: ");
-					scanf("%d", &data);
-					insertFront(data);
-					printList();
-					break;
-			case 2: printf("Input data: ");
-					scanf("%d", &data);
-					insertEnd(data);
-					printList();
-					break;
-			case 3: printf("Input data: ");
-					scanf("%d", &data);
-					printf("Input position: ");
-					scanf("%d", &pos);
-					insertNth(data, pos);
-					printList();
-					break;
-			case 4: deleteFront();
-					printList();
-					break;
-			case 5: deleteEnd();
-					printList();
-					break;
-			case 6: printf("Input position: ");
-					scanf("%d", &pos);
-					deleteNth(pos);
-					printList();
-					break;
-			case 7: printList();
-					break;
-			default: printf("Choice invalid.\n");
+		printf("Choose a task.\n");
+		scanf("%c", &choice);
+		switch(choice){
+			case '1':
+				system("cls");
+				printf("Input data: ");
+				int item;
+				scanf("%d", &item);
+				insertItem(item);
+				printList();
+				break;
+			
+//			case '2':
+//				system("cls");
+//				break;
+//				
+//			case '3': 
+//				system("cls");
+//				break;
+			
+			case '4': 
+				system("cls");
+				printList();
+				break;
+			
+			default:
+				system("cls");
+				printf("Invalid key. Try again.\n");
+				break;
 		}
 	}
-	return 1;
 }

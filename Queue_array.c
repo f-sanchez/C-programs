@@ -114,8 +114,9 @@ int main() {
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
 		char choice;
-//		choice = getch();
-		choice = getchar();
+		choice = getch();
+//		printf("%c", getchar());
+//		scanf("%c", &choice);
 	/*	if (!(checkInput(choice))) {
 			printf("error\n");
 		}

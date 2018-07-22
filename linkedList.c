@@ -57,11 +57,16 @@ void insertNth(int data, int pos){
 void printList(){
 	
 	temp = head;
-	printf("Linked List: \n");
-	while (temp != NULL){
-		printf("%d ", temp->data);
-		temp = temp->next;
+	if (temp == NULL){
+		printf("List is empty.\n");
+	} else {
+		printf("Linked List: \n");
+		while (temp != NULL){
+			printf("%d ", temp->data);
+			temp = temp->next;
 	}
+	}
+	
 	printf("\n");
 }
 
@@ -123,6 +128,7 @@ int main(){
 		printf("[4] deleteFront\n");
 		printf("[5] deleteEnd\n");
 		printf("[6] deleteNth\n");
+		printf("[7] printList\n");
 		scanf("%d", &choice);
 		
 		switch (choice){
@@ -154,6 +160,8 @@ int main(){
 					scanf("%d", &pos);
 					deleteNth(pos);
 					printList();
+					break;
+			case 7: printList();
 					break;
 			default: printf("Choice invalid.\n");
 		}

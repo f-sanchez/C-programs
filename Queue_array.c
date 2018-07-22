@@ -20,9 +20,7 @@ int isFull(int queue[]) {
 //add item to queue
 void enqueue(int queue[], int item) {
 	if (isEmpty()) {
-		//printf("Front: %d\n", front);
 		front++;
-		//printf("Front: %d\n", front);
 	}
 
 	if (rear == SIZE - 1) {
@@ -35,25 +33,25 @@ void enqueue(int queue[], int item) {
 	}
 }
 
-void dequeue(int queue[]) {
+//remove item from queue
+int dequeue(int queue[]) {
 	if (isEmpty()) {
-		printf("Queue empty.\n\n");
+		return -1;
 	}
-	else if (front == rear) {
-		printf("%d dequeued.\n\n", queue[front]);
+	
+	int item1 = queue[front];
+	
+	if (front == rear) {
 		front = rear = -1;
 	}
 	else {
-	    printf("%d dequeued.\n\n", queue[front]);
 	    int i;
 	    for (i=front; i<rear; i++){
-	        printf("1-%d ", queue[i]);
 	        queue[i] = queue[i+1];
-	        printf("2-%d\n", queue[i]);
 	    }
 	    rear--;
-		
 	}
+	return item1;
 }
 
 //get front of queue
@@ -107,41 +105,40 @@ int checkInput(char input) {
 int main() {
 	int queue[SIZE];
 
-	printf("--------QUEUE--------\n\n");
 	while (1) {
+		printf("--------QUEUE--------\n\n");
 		printf("[1] enqueue\n");
 		printf("[2] dequeue\n");
 		printf("[3] get Front & Rear\n");
 		printf("[4] display\n");
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
-		int choice;
-		scanf("%d", &choice);
-		//choice = getch();
+		char choice;
+//		choice = getch();
+		choice = getchar();
 	/*	if (!(checkInput(choice))) {
 			printf("error\n");
 		}
 		else {
 			choice = choice - 48;
 
-			
 		}*/
 		switch (choice) {
-			case 1:
-				//system("cls");
+			case '1':
+				system("cls");
 				printf("Enter item: ");
 				int item;
 				scanf("%d", &item);
 				enqueue(queue, item);
 				display(queue);
 				break;
-			case 2:
-			//	system("cls");
-				dequeue(queue);
+			case '2':
+				system("cls");
+				printf("element dequeued: %d\n\n", dequeue(queue));
 				display(queue);
 				break;
-			case 3:
-			//	system("cls");
+			case '3':
+				system("cls");
 				if (isEmpty()) {
 					printf("Queue empty.\n\n");
 				}
@@ -151,19 +148,17 @@ int main() {
 					printf("Rear: %d\n\n", getRear(queue));
 				}
 				break;
-			case 4:
-			//	system("cls");
+			case '4':
+				system("cls");
 				display(queue);
 				break;
-			case 0:
+			case '0':
 				exit(0);
 			default:
-			//	system("cls");
+				system("cls");
 				printf("Please select a valid key.\n\n");
 				break;
 			}
-
-	//	getch();
-	//	return 0;
 	}
+	return 0;
 }

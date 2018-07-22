@@ -15,7 +15,7 @@ int isEmpty() {
 
 //queue full
 int isFull(int queue[]) {
-	return (rear == SIZE - 1); //returns true (1) if full
+	return (rear == SIZE - 1); //returns true (1) if full ; index starts from 0 so full = rear = size-1
 }
 
 //add item to queue
@@ -23,23 +23,11 @@ void enqueue(int queue[], int item) {
 	if (isEmpty()) {
 		front++;	//from -1 to 0 ; index 0 = front
 	}
-
-	if (rear == SIZE - 1) {				//index starts from 0 so full = rear = size-1
-		printf("Queue overflow.\n\n");
-		return;
-	}
-	else {
-		queue[++rear] = item;	//pre increment since rear starts from -1
-		printf("element added to queue: %d\n\n", item);
-	}
+	queue[++rear] = item;	//pre increment since rear starts from -1
 }
 
 //remove item from queue
 int dequeue(int queue[]) {
-	if (isEmpty()) {
-		return -1;
-	}
-	
 	int item1 = queue[front];	//store queue[front] in item1 to return element for dequeue
 	
 	if (front == rear) {
@@ -68,10 +56,10 @@ int getRear(int queue[]) {
 void display(int queue[]) {
 	int i;
 	if (isEmpty()) {
-		printf("Queue empty.\n");
+		printf("\nQueue empty.\n");
 	}
 	else {
-		printf("Queue: ");			
+		printf("\nQueue: ");			
 		for (i = front; i <= rear; i++) {		//print items in queue from front to rear
 			if (i == rear) {
 				printf("[%d] =>%d \n", i, queue[i]);
@@ -105,6 +93,7 @@ int checkInput(char input) {
 int main() {
 	int queue[SIZE];
 	while (1) {
+		fflush(stdin);
 		printf("--------QUEUE--------\n\n");
 		printf("[1] enqueue\n");
 		printf("[2] dequeue\n");
@@ -113,9 +102,8 @@ int main() {
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
 		char choice;
-		choice = getch();
-//		printf("%c", getchar());
-//		scanf("%c", &choice);
+//		choice = getch();
+		scanf("%c", &choice);
 	/*	if (!(checkInput(choice))) {
 			printf("error\n");
 		}
@@ -126,26 +114,33 @@ int main() {
 		switch (choice) {
 			case '1':
 				system("cls");
-				printf("Enter item: ");
-				int item;
-				scanf("%d", &item);
-				enqueue(queue, item);
+				if (isFull(queue)){
+					printf("Queue full.\n");
+				}
+				else {
+					printf("Enter item: ");
+					int item;
+					scanf("%d", &item);
+					enqueue(queue, item);
+				}
 				display(queue);
 				break;
 			case '2':
 				system("cls");
-				printf("element dequeued: %d\n\n", dequeue(queue));
+				if (!isEmpty()){
+					printf("element dequeued: %d\n", dequeue(queue));
+				}
 				display(queue);
 				break;
 			case '3':
 				system("cls");
 				if (isEmpty()) {
-					printf("Queue empty.\n\n");
+					printf("\nQueue empty.\n\n");
 				}
 				else {
 					display(queue);
 					printf("Front: %d\n", getFront(queue));
-					printf("Rear: %d\n\n", getRear(queue));
+					printf("Rear: %d\n", getRear(queue));
 				}
 				break;
 			case '4':

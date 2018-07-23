@@ -29,16 +29,16 @@ void enqueue(int queue[], int item) {
 //remove item from queue
 int dequeue(int queue[]) {
 	int item1 = queue[front];	//store queue[front] in item1 to return element for dequeue
-	
+
 	if (front == rear) {
 		front = rear = -1;		//if there is only 1 item in queue, queue resets to empty
 	}
 	else {						//else remaining items in queue are shifted to the left to occupy memory left by dequeued item
-	    int i;
-	    for (i=front; i<rear; i++){
-	        queue[i] = queue[i+1];
-	    }
-	    rear--;					//rear gets decremented after every dequeue
+		int i;
+		for (i = front; i<rear; i++) {
+			queue[i] = queue[i + 1];
+		}
+		rear--;					//rear gets decremented after every dequeue
 	}
 	return item1;				//return dequeued item (item in front of queue before left shift)
 }
@@ -59,7 +59,7 @@ void display(int queue[]) {
 		printf("\nQueue empty.\n");
 	}
 	else {
-		printf("\nQueue: ");			
+		printf("\nQueue: ");
 		for (i = front; i <= rear; i++) {		//print items in queue from front to rear
 			if (i == rear) {
 				printf("[%d] =>%d \n", i, queue[i]);
@@ -72,23 +72,26 @@ void display(int queue[]) {
 	printf("\n");
 }
 
-/*
-int checkInput(char input) {
-	int flag = 0;
-	for (int i = 48; i <= 57; i++) {
-		if (input == i) {
-			flag = 1;
-			break;
-		}
-	}
-	if (flag == 1) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
+//function to clean stdin
+//note: fflush(stdin) shouldve worked but since im running visual studio,
+//this function is what works
+void flush_stdin(void) {
+	int ch;
+	do {
+		ch = getchar();
+	} while (ch != '\n' && ch != EOF);
 }
-*/
+
+//function to accept only integer
+int checkInput() {
+	int input;
+	while (scanf("%d", &input) == 0) {					//if scanf failed to scan an integer; yields false
+		printf("Input invalid. Please enter an integer.\n");
+		//fflush(stdin);
+		flush_stdin();
+	}
+	return input;
+}
 
 int main() {
 	int queue[SIZE];
@@ -102,50 +105,52 @@ int main() {
 		printf("[0] Exit\n");
 		printf("Please select a task: ");
 		char choice;
-		//scanf("%c", &choice);]
-		choice = getch();
+		scanf("%c", &choice);
+		flush_stdin();
 		switch (choice) {
-			case '1':
-				system("cls");
-				if (isFull(queue)){
-					printf("Queue full.\n");
-				}
-				else {
-					printf("Enter item: ");
-					int item;
-					scanf("%d", &item);
-					enqueue(queue, item);
-				}
+		case '1':
+			system("cls");
+			if (isFull(queue)) {
+				printf("Queue full.\n");
+			}
+			else {
+				printf("Enter item: ");
+				int item;
+				//scanf("%d", &item);
+				item = checkInput();
+				flush_stdin();
+				enqueue(queue, item);
+			}
+			display(queue);
+			break;
+		case '2':
+			system("cls");
+			if (!isEmpty()) {
+				printf("element dequeued: %d\n", dequeue(queue));
+			}
+			display(queue);
+			break;
+		case '3':
+			system("cls");
+			if (isEmpty()) {
+				printf("\nQueue empty.\n\n");
+			}
+			else {
 				display(queue);
-				break;
-			case '2':
-				system("cls");
-				if (!isEmpty()){
-					printf("element dequeued: %d\n", dequeue(queue));
-				}
-				display(queue);
-				break;
-			case '3':
-				system("cls");
-				if (isEmpty()) {
-					printf("\nQueue empty.\n\n");
-				}
-				else {
-					display(queue);
-					printf("Front: %d\n", getFront(queue));
-					printf("Rear: %d\n", getRear(queue));
-				}
-				break;
-			case '4':
-				system("cls");
-				display(queue);
-				break;
-			case '0':
-				exit(0);
-			default:
-				system("cls");
-				printf("Please select a valid key.\n\n");
-				break;
+				printf("Front: %d\n", getFront(queue));
+				printf("Rear: %d\n", getRear(queue));
+			}
+			break;
+		case '4':
+			system("cls");
+			display(queue);
+			break;
+		case '0':
+			exit(0);
+		default:
+			system("cls");
+			printf("Please select a valid key.\n\n");
+			break;
 		}
 	}
 	return 0;

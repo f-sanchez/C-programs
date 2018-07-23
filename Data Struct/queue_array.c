@@ -85,7 +85,7 @@ void flush_stdin(void) {
 //function to accept only integer
 int checkInput() {
 	int input;
-	while (scanf("%d", &input) == 0) {					//if scanf failed to scan an integer; yields false
+	while (scanf("%d", &input) == 0){					//if scanf failed to scan an integer; yields false
 		printf("Input invalid. Please enter an integer.\n");
 		//fflush(stdin);
 		flush_stdin();

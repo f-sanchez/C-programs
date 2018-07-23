@@ -1,0 +1,17 @@
+Array Implementation
+
+	Advantages
+	1. Easy access of element at a specific index
+
+	Disadvantages
+	1. Element insertion or deletion is expensive; for every new element(that has to be added in front or in the middle of the list), existing elements have to be shifted
+	2. Fixed size
+
+Pointers
+	Advantages
+	1. Dynamic size
+	2. Easy element insertion and deletion
+
+	Disadvantages
+	1. Accessing of elements has to be sequential starting from head node.
+	2. Needs extra memory space for a pointer

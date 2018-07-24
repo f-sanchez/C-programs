@@ -1,0 +1,7 @@
+﻿  queue_array.c
+c:\users\owner\documents\visual studio 2017\projects\queue - array\queue - array\queue_array.c(88): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
+c:\users\owner\documents\visual studio 2017\projects\queue - array\queue - array\queue_array.c(108): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
+  Queue - Array.vcxproj -> c:\users\owner\documents\visual studio 2017\Projects\Queue - Array\Debug\Queue - Array.exe
+  Queue - Array.vcxproj -> c:\users\owner\documents\visual studio 2017\Projects\Queue - Array\Debug\Queue - Array.pdb (Partial PDB)

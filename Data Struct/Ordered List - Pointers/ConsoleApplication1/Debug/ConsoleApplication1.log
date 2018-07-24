@@ -1,0 +1,10 @@
+﻿  pointers_ordered.c
+c:\users\owner\documents\visual studio 2017\projects\ordered list - pointers\consoleapplication1\pointers_ordered.c(140): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
+c:\users\owner\documents\visual studio 2017\projects\ordered list - pointers\consoleapplication1\pointers_ordered.c(161): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
+c:\users\owner\documents\visual studio 2017\projects\ordered list - pointers\consoleapplication1\pointers_ordered.c(177): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: see declaration of 'scanf'
+c:\users\owner\documents\visual studio 2017\projects\ordered list - pointers\consoleapplication1\pointers_ordered.c(149): warning C4101: 'choice': unreferenced local variable
+  ConsoleApplication1.vcxproj -> C:\Users\Owner\Documents\Visual Studio 2017\Projects\Ordered List - Pointers\Debug\ConsoleApplication1.exe
+  ConsoleApplication1.vcxproj -> C:\Users\Owner\Documents\Visual Studio 2017\Projects\Ordered List - Pointers\Debug\ConsoleApplication1.pdb (Partial PDB)
